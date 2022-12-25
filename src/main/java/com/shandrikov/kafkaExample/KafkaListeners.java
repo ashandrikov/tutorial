@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 public class KafkaListeners {
 
     @KafkaListener(
-            topics = "shandrikovcode",
-            groupId = "groupId")
+            topics = "${main.topic}",
+            groupId = "${spring.kafka.consumer.group-id}")
     void listener(String data){
         System.out.println("Data received: " + data);
     }

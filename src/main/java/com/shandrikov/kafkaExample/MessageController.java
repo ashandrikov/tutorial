@@ -1,6 +1,7 @@
 package com.shandrikov.kafkaExample;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,11 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/messages")
 public class MessageController {
 
+    @Value("${main.topic}")
+    private String topic;
+
     @Autowired
     private KafkaTemplate<String, String>kafkaTemplate;
 
     @PostMapping
     public void publish(@RequestBody MessageRequest request){
-        kafkaTemplate.send("shandrikovcode", request.message());
+        kafkaTemplate.send(topic, request.message());
     }
 }
