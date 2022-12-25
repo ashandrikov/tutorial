@@ -1,4 +1,4 @@
 package com.shandrikov.kafkaExample;
 
-public record MessageRequest (String message){
+public record MessageRequest (Book book){
 }
